@@ -1,18 +1,6 @@
 import wollok.game.*
 
-class Jugador{
-	var madera = 0
-	var piedra = 0
-	method madera() = madera
-	method piedra() = piedra
-	method recolectar_madera(cantidad){
-		madera = madera + cantidad
-	}
-	method recolectar_piedra(cantidad){
-		piedra = piedra + cantidad
-	}
-}
-
+/////////////////// CLASE CONSTRUCCION
 class Construccion {
 	var cmadera = 20 // cantidad necesaria para finalizar la contruccion
 	var cpiedra = 20
@@ -31,6 +19,19 @@ class Construccion {
 		method image() = "casa.png"
 	} */
 }
+////////////////////////////// CLASES DE JUGADORES
+class Jugador{
+	var madera = 0
+	var piedra = 0
+	method madera() = madera
+	method piedra() = piedra
+	method recolectar_madera(cantidad){
+		madera = madera + cantidad
+	}
+	method recolectar_piedra(cantidad){
+		piedra = piedra + cantidad
+	}
+}
 
 class Jugador1 inherits Jugador{
 	var property position = game.at(5,15)
@@ -45,13 +46,15 @@ class Jugador2 inherits Jugador{
 const jugador1 = new Jugador1()
 const jugador2 = new Jugador2()
 
+/////////////////// CLASES DE LOS RECURSOS
+
 class Arbol{
 	const cantidad_madera = 1
 
 	method image() = "arbol.png"
-	method recolectado(){
+	method recolectado(quien){
 		game.removeVisual(self)  // mejorar mas adelante
-		// agregar madera al jugador que toque el arbol
+		quien.recolectar_madera(cantidad_madera)
 	}
 }
 
@@ -59,21 +62,24 @@ class Piedras{
 	const cantidad_piedra = 1
 
 	method image() = "piedra.png"
-	method recolectado(){
+	method recolectado(quien){
 		game.removeVisual(self) // mejorar mas adelante
-		// agregar piedra al jugador que toque la piedra
+		quien.recolectar_piedra(cantidad_piedra)
 	}
 }
 
-// rehacer las ui como clase si es posible
 
+////////////////////// INTERFACES DE USUARIO
+
+
+// rehacer las ui como clase si es posible
 object ui1{
 	method position() = game.at(2,24)
 	method text() = 'madera:' + jugador1.madera() + ' ' + 'piedra:' + jugador1.piedra()
 }
 
 object ui2{
-	method position() = game.at(35,24)
+	method position() = game.at(34,24)
 	method text() = 'madera:' + jugador2.madera() + ' ' + 'piedra:' + jugador2.piedra()
 }
 
@@ -85,6 +91,9 @@ object timer{
 	method text() = "Tiempo:" + self.tiempo()
 }
 
+
+///////////////////////////// PANTALLA
+
 object pantalla{
 
 	method inicio(){
@@ -94,7 +103,7 @@ object pantalla{
 		//self.collisiones()
 	}
 	method configuracion(){
-		game.height(25) // resolucion optima, poner mas de 25 hace que los png pierdan la relacion de aspecto que tienen
+		game.height(25) // resolucion optima, poner mas de 25 hace que los png pierdan la relacion de aspecto
 		game.width(37)
 		game.title("prueba")
 		game.boardGround("fondo.png")
@@ -111,7 +120,7 @@ object pantalla{
 	method teclas(){
 
 	}
-	/*method collisiones(){
-		game.onCollideDo
-	}*/
+	method collisiones(quien){
+		game.onCollideDo(quien,{algo => algo.recolectado(quien)})
+	}
 }

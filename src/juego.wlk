@@ -1,4 +1,4 @@
-import wollo.game.*
+import wollok.game.*
 
 class Jugador{
 	var madera = 0
@@ -13,7 +13,7 @@ class Jugador{
 	}
 }
 
-class construccion{
+class Construccion {
 	var cmadera = 20 // cantidad necesaria para finalizaar la contruccion
 	var cpiedra = 20
 
@@ -27,9 +27,9 @@ class construccion{
 		cpiedra = cpiedra - cantidad
 	}
 	// if 'ambas cantidades' <= 0 'finaliza construccion'
-	method finalizar(){
+	/*method finalizar(){
 		method image() = "casa.png"
-	}
+	} */
 }
 
 class Jugador1 inherits Jugador{
@@ -45,7 +45,7 @@ class Jugador2 inherits Jugador{
 const jugador1 = new Jugador1()
 const jugador2 = new Jugador2()
 
-class arbol{
+class Arbol{
 	const cantidad_madera = 1
 
 	method image() = "arbol.png"
@@ -55,7 +55,7 @@ class arbol{
 	}
 }
 
-class piedras{
+class Piedras{
 	const cantidad_piedra = 1
 
 	method image() = "piedra.png"
@@ -79,7 +79,7 @@ object ui2{
 
 object timer{
 	method position() = game.at(15,29)
-	method text() = // agregar temporizador
+	//method text() = // agregar temporizador
 }
 
 object pantalla{
@@ -89,7 +89,7 @@ object pantalla{
 		self.configuracion()
 		self.visuals()
 		self.teclas()
-		self.collisiones()
+		//self.collisiones()
 	}
 	method configuracion(){
 		game.height(25) // resolucion optima, poner mas de 25 hace que los png pierdan la relacion de aspecto que tienen
@@ -109,7 +109,7 @@ object pantalla{
 	method teclas(){
 
 	}
-	method collisiones(){
+	/*method collisiones(){
 		game.onCollideDo
-	}
+	}*/
 }

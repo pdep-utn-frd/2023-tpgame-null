@@ -1,6 +1,7 @@
 import wollok.game.*
 
 ////////////////////////////// CLASE CONSTRUCCION
+
 class Construccion {
 	var cmadera = 20 // cantidad necesaria para finalizar la contruccion
 	var cpiedra = 20
@@ -20,6 +21,7 @@ class Construccion {
 	} */
 }
 ////////////////////////////// CLASES DE JUGADORES
+
 class Jugador{
 	var madera = 0
 	var piedra = 0
@@ -36,11 +38,13 @@ class Jugador{
 class Jugador1 inherits Jugador{
 	var property position = game.at(5,15)
 	method image() = "jugador1.png"
+	method recolectado(x){}
 }
 
 class Jugador2 inherits Jugador{
 	var property position = game.at(24,15)
 	method image() = "jugador2.png"
+	method recolectado(x){}
 }
 
 const jugador1 = new Jugador1()

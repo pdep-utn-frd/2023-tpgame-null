@@ -14,7 +14,7 @@ class Jugador{
 }
 
 class Construccion {
-	var cmadera = 20 // cantidad necesaria para finalizaar la contruccion
+	var cmadera = 20 // cantidad necesaria para finalizar la contruccion
 	var cpiedra = 20
 
 	method image() = "sitio.png"
@@ -26,7 +26,7 @@ class Construccion {
 	method dar_piedra(cantidad){
 		cpiedra = cpiedra - cantidad
 	}
-	// if 'ambas cantidades' <= 0 'finaliza construccion'
+	// if cmadera and cpiedra <= 0 'finaliza construccion'
 	/*method finalizar(){
 		method image() = "casa.png"
 	} */
@@ -68,22 +68,24 @@ class Piedras{
 // rehacer las ui como clase si es posible
 
 object ui1{
-	method position() = game.at(2,29)
+	method position() = game.at(2,24)
 	method text() = 'madera:' + jugador1.madera() + ' ' + 'piedra:' + jugador1.piedra()
 }
 
 object ui2{
-	method position() = game.at(28,29)
+	method position() = game.at(35,24)
 	method text() = 'madera:' + jugador2.madera() + ' ' + 'piedra:' + jugador2.piedra()
 }
 
 object timer{
+	var tiempo = 120
+	method tiempo() = tiempo
 	method position() = game.at(15,29)
-	//method text() = // agregar temporizador
+	game.onTick(1000,"timer", tiempo = tiempo - 1)
+	method text() = "Tiempo:" + self.tiempo()
 }
 
 object pantalla{
-	
 
 	method inicio(){
 		self.configuracion()

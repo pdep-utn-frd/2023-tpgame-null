@@ -2,7 +2,6 @@ import juego.*
 import wollok.game.*
 
 program abc {
-
 	pantalla.inicio()
 	game.start()
 }

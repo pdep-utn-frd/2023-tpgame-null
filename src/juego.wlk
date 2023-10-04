@@ -1,6 +1,6 @@
 import wollok.game.*
 
-/////////////////// CLASE CONSTRUCCION
+////////////////////////////// CLASE CONSTRUCCION
 class Construccion {
 	var cmadera = 20 // cantidad necesaria para finalizar la contruccion
 	var cpiedra = 20
@@ -46,7 +46,7 @@ class Jugador2 inherits Jugador{
 const jugador1 = new Jugador1()
 const jugador2 = new Jugador2()
 
-/////////////////// CLASES DE LOS RECURSOS
+////////////////////////////// CLASES DE LOS RECURSOS
 
 class Arbol{
 	const cantidad_madera = 1
@@ -69,7 +69,7 @@ class Piedras{
 }
 
 
-////////////////////// INTERFACES DE USUARIO
+////////////////////////////// INTERFACES DE USUARIO
 
 
 // rehacer las ui como clase si es posible
@@ -92,7 +92,7 @@ object timer{
 }
 
 
-///////////////////////////// PANTALLA
+////////////////////////////// PANTALLA
 
 object pantalla{
 
@@ -100,7 +100,8 @@ object pantalla{
 		self.configuracion()
 		self.visuals()
 		self.teclas()
-		//self.collisiones()
+		self.collisiones(jugador1)
+		self.collisiones(jugador2)
 	}
 	method configuracion(){
 		game.height(25) // resolucion optima, poner mas de 25 hace que los png pierdan la relacion de aspecto

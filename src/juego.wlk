@@ -43,8 +43,12 @@ class Jugador1 inherits Jugador{
 
 class Jugador2 inherits Jugador{
 	var property position = game.at(24,15)
+	method move(nuevaPosicion) {
+		self.position(nuevaPosicion)
+	}	
 	method image() = "jugador2.png"
 	method recolectado(x){}
+	
 }
 
 const jugador1 = new Jugador1()
@@ -91,7 +95,7 @@ object timer{
 	var tiempo = 120
 	method tiempo() = tiempo
 	method position() = game.at(15,29)
-	game.onTick(1000,"timer", tiempo = tiempo - 1)
+	//game.onTick(1000,"timer", tiempo = tiempo - 1)
 	method text() = "Tiempo:" + self.tiempo()
 }
 
@@ -118,12 +122,19 @@ object pantalla{
 		game.addVisual(ui2)
 		game.addVisual(timer)
 		game.addVisualCharacter(jugador1)
-		game.addVisualCharacter(jugador2)
+		game.addVisual(jugador2)
+		
+		
 		// agregar construcciones para cada jugador (que solo haya 1 para cada uno en cada momento)
 		// agregar arboles y piedras de forma random (tener en cuenta posisicion de contrucciones)
 	}
 	method teclas(){
-
+//MOVIMIENTO JUGADOR 2
+		
+		keyboard.w().onPressDo{jugador2.move(jugador2.position().up(1))}
+		keyboard.s().onPressDo{jugador2.move(jugador2.position().down(1))}
+		keyboard.a().onPressDo{jugador2.move(jugador2.position().left(1))}
+		keyboard.d().onPressDo{jugador2.move(jugador2.position().right(1))}
 	}
 	method collisiones(quien){
 		game.onCollideDo(quien,{algo => algo.recolectado(quien)})

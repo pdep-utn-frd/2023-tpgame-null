@@ -94,9 +94,11 @@ object ui2{
 object timer{
 	var tiempo = 120
 	method tiempo() = tiempo
-	method position() = game.at(15,29)
-	//game.onTick(1000,"timer", tiempo = tiempo - 1)
+	method position() = game.at(15,24)
 	method text() = "Tiempo:" + self.tiempo()
+	method descontarTiempo() {
+		tiempo= tiempo-1
+	}
 }
 
 
@@ -114,7 +116,7 @@ object pantalla{
 	method configuracion(){
 		game.height(25) // resolucion optima, poner mas de 25 hace que los png pierdan la relacion de aspecto
 		game.width(37)
-		game.title("prueba")
+		game.title("Crafting battle")
 		game.boardGround("fondo.png")
 	}
 	method visuals(){
@@ -123,6 +125,9 @@ object pantalla{
 		game.addVisual(timer)
 		game.addVisualCharacter(jugador1)
 		game.addVisual(jugador2)
+		
+		game.onTick(1000,"timer",{ timer.descontarTiempo()})
+		
 		
 		
 		// agregar construcciones para cada jugador (que solo haya 1 para cada uno en cada momento)

@@ -36,13 +36,13 @@ class Jugador{
 }
 
 class Jugador1 inherits Jugador{
-	var property position = game.at(5,15)
+	var property position = game.at(29,15)
 	method image() = "jugador1.png"
 	method recolectado(x){}
 }
 
 class Jugador2 inherits Jugador{
-	var property position = game.at(24,15)
+	var property position = game.at(5,15)
 	method move(nuevaPosicion) {
 		self.position(nuevaPosicion)
 	}	
@@ -82,19 +82,19 @@ class Piedras{
 
 // rehacer las ui como clase si es posible
 object ui1{
-	method position() = game.at(2,24)
+	method position() = game.at(34,24)
 	method text() = 'madera:' + jugador1.madera() + ' ' + 'piedra:' + jugador1.piedra()
 }
 
 object ui2{
-	method position() = game.at(34,24)
+	method position() = game.at(2,24)
 	method text() = 'madera:' + jugador2.madera() + ' ' + 'piedra:' + jugador2.piedra()
 }
 
 object timer{
 	var tiempo = 120
 	method tiempo() = tiempo
-	method position() = game.at(15,24)
+	method position() = game.at(18,24)
 	method text() = "Tiempo:" + self.tiempo()
 	method descontarTiempo() {
 		tiempo= tiempo-1
@@ -116,7 +116,7 @@ object pantalla{
 	method configuracion(){
 		game.height(25) // resolucion optima, poner mas de 25 hace que los png pierdan la relacion de aspecto
 		game.width(37)
-		game.title("Crafting battle")
+		game.title("Mini builder")
 		game.boardGround("fondo.png")
 	}
 	method visuals(){
@@ -126,7 +126,7 @@ object pantalla{
 		game.addVisualCharacter(jugador1)
 		game.addVisual(jugador2)
 		game.onTick(1000,"generar arboles",{game.addVisual(new Arbol(position = game.at(1.randomUpTo(36),18.randomUpTo(23))))})
-		game.onTick(1000,"generar piedras",{game.addVisual(new Piedras(position = game.at(1.randomUpTo(36),1.randomUpTo())))})
+		game.onTick(1000,"generar piedras",{game.addVisual(new Piedras(position = game.at(1.randomUpTo(36),1.randomUpTo(6))))})
 		game.onTick(1000,"timer",{ timer.descontarTiempo()})
 		
 		

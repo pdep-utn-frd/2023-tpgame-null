@@ -58,7 +58,7 @@ const jugador2 = new Jugador2()
 
 class Arbol{
 	const cantidad_madera = 1
-
+	var property position
 	method image() = "arbol.png"
 	method recolectado(quien){
 		game.removeVisual(self)  // mejorar mas adelante
@@ -68,7 +68,7 @@ class Arbol{
 
 class Piedras{
 	const cantidad_piedra = 1
-
+	var property position
 	method image() = "piedra.png"
 	method recolectado(quien){
 		game.removeVisual(self) // mejorar mas adelante
@@ -125,7 +125,8 @@ object pantalla{
 		game.addVisual(timer)
 		game.addVisualCharacter(jugador1)
 		game.addVisual(jugador2)
-		
+		game.onTick(1000,"generar arboles",{game.addVisual(new Arbol(position = game.at(1.randomUpTo(36),18.randomUpTo(23))))})
+		game.onTick(1000,"generar piedras",{game.addVisual(new Piedras(position = game.at(1.randomUpTo(36),1.randomUpTo())))})
 		game.onTick(1000,"timer",{ timer.descontarTiempo()})
 		
 		

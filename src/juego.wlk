@@ -92,12 +92,17 @@ object ui2{
 }
 
 object timer{
-	var tiempo = 120
+	var tiempo = 10
+	method changeTime(){
+		tiempo =10	}
 	method tiempo() = tiempo
 	method position() = game.at(18,24)
 	method text() = "Tiempo:" + self.tiempo()
 	method descontarTiempo() {
-		tiempo= tiempo-1
+		if (tiempo > 0){
+		tiempo= tiempo-1}
+		else
+		pantalla.gameOver()
 	}
 }
 
@@ -107,6 +112,16 @@ object timer{
 object pantalla{
 
 	method inicio(){
+		game.clear()
+		game.height(25) // resolucion optima, poner mas de 25 hace que los png pierdan la relacion de aspecto
+		game.width(36)
+		game.title("Mini builder")
+		game.boardGround("fondo.png")
+		game.addVisual(inicioDelJuego)
+		keyboard.space().onPressDo{self.start()}
+	}
+	method start(){
+		game.removeVisual(inicioDelJuego)
 		self.configuracion()
 		self.visuals()
 		self.teclas()
@@ -115,7 +130,7 @@ object pantalla{
 	}
 	method configuracion(){
 		game.height(25) // resolucion optima, poner mas de 25 hace que los png pierdan la relacion de aspecto
-		game.width(37)
+		game.width(36)
 		game.title("Mini builder")
 		game.boardGround("fondo.png")
 	}
@@ -134,6 +149,19 @@ object pantalla{
 		// agregar construcciones para cada jugador (que solo haya 1 para cada uno en cada momento)
 		// agregar arboles y piedras de forma random (tener en cuenta posisicion de contrucciones)
 	}
+
+	method gameOver(){
+		game.clear()
+		game.addVisual(finDelJuego)
+		keyboard.space().onPressDo{
+			game.removeVisual(finDelJuego)
+			timer.changeTime()
+			self.inicio()
+		}
+		keyboard.f().onPressDo{
+			game.stop()
+		}
+	}
 	method teclas(){
 //MOVIMIENTO JUGADOR 2
 		
@@ -146,3 +174,16 @@ object pantalla{
 		game.onCollideDo(quien,{algo => algo.recolectado(quien)})
 	}
 }
+	class Visual {
+	var property image
+	var property position = game.origin()
+}
+	
+	const finDelJuego = new Visual(
+		image = "gameOverRed.png",
+		position = game.at(-1,2)
+	)
+	const inicioDelJuego = new Visual(
+	image =  "inicio.png",
+	position = game.at(-1,2)
+)

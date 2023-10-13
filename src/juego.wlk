@@ -3,12 +3,18 @@ import wollok.game.*
 ////////////////////////////// CLASE CONSTRUCCION
 
 class Construccion {
+	const progreso = new Dictionary()
 	var cmadera = 20 // cantidad necesaria para finalizar la contruccion
 	var cpiedra = 20
-
 	method image() = "sitio.png"
 	method cmadera() = cmadera
 	method cpiedra() = cpiedra
+	method iniciar(){
+		progreso.put(5,"casa1.png")
+		progreso.put(10,"casa2.png")
+		progreso.put(15,"casa3.png")
+		progreso.put(20,"casa4.png")	
+	}
 	method dar_madera(cantidad){  // el parametro es  la cantidad de recurso que el jugador tiene, y pierde al usarlo en la construccion
 		cmadera = cmadera - cantidad
 	}
@@ -76,7 +82,6 @@ class Piedras{
 	}
 }
 
-
 ////////////////////////////// INTERFACES DE USUARIO
 
 
@@ -118,6 +123,9 @@ object pantalla{
 		game.title("Mini builder")
 		game.boardGround("fondo.png")
 		game.addVisual(inicioDelJuego)
+		keyboard.f().onPressDo{
+			game.stop()
+		}
 		keyboard.space().onPressDo{self.start()}
 	}
 	method start(){

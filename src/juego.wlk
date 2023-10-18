@@ -9,6 +9,13 @@ class Construccion {
 	var cantidadPiedra = 0
 	var total = 0
 	var property position = game.at(1.randomUpTo(35),7.randomUpTo(17))
+	
+	method default(){
+		position = game.at(1.randomUpTo(35),7.randomUpTo(17))
+		total = 0
+		cantidadMadera = 0
+		cantidadPiedra =0
+	}
 	method cmadera() = cantidadMadera
 	method cpiedra() = cantidadPiedra
 	method calcularTotal(){
@@ -38,12 +45,12 @@ object construccion1 inherits Construccion{
 	method image(){
 		if (total <= 4){
 			return progreso.basicGet(total.roundUp())
-		} else {return "casafa.png"}
+		} else {return "casa4a.png"}
 	} 
 	method terminado(){
 		if (cantidadMadera >= maderaRequiere and cantidadPiedra >= piedraRequiere){
 			game.addVisual(casaAzulFinal)
-			game.removeVisual(self)
+			self.default()	
 		}
 	}
 }
@@ -61,12 +68,12 @@ object construccion2 inherits Construccion{
 	method image(){
 		if (total <= 4){
 			return progreso.basicGet(total.roundUp())
-		} else {return "casafr.png"}
+		} else {return "casa4r.png"}
 	}
 	method terminado(){
 		if (cantidadMadera >= maderaRequiere and cantidadPiedra >= piedraRequiere){
 			game.addVisual(casaRojaFinal)
-			game.removeVisual(self)
+			self.default()
 		}
 	}
 }

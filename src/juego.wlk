@@ -3,28 +3,72 @@ import wollok.game.*
 ////////////////////////////// CLASE CONSTRUCCION
 
 class Construccion {
+	const maderaRequiere = 5
+	const piedraRequiere = 5
+	var cantidadMadera = 0 // cantidad necesaria para finalizar la contruccion
+	var cantidadPiedra = 0
+	var total = 0
+	var property position = game.at(1.randomUpTo(35),7.randomUpTo(17))
+	method cmadera() = cantidadMadera
+	method cpiedra() = cantidadPiedra
+	method calcularTotal(){
+		total = (cantidadMadera + cantidadPiedra)/2
+	}
+	method darMadera(cantidad){  // el parametro es  la cantidad de recurso que el jugador tiene, y pierde al usarlo en la construccion
+		cantidadMadera = cantidadMadera + cantidad
+		self.calcularTotal()
+	}
+	method darPiedra(cantidad){
+		cantidadPiedra = cantidadPiedra + cantidad
+		self.calcularTotal()
+	}
+	method recolectado(x){}
+}
+
+object construccion1 inherits Construccion{
 	const progreso = new Dictionary()
-	var cmadera = 20 // cantidad necesaria para finalizar la contruccion
-	var cpiedra = 20
-	method image() = "sitio.png"
-	method cmadera() = cmadera
-	method cpiedra() = cpiedra
+
 	method iniciar(){
-		progreso.put(5,"casa1.png")
-		progreso.put(10,"casa2.png")
-		progreso.put(15,"casa3.png")
-		progreso.put(20,"casa4.png")	
+		progreso.put(0,"casa0a.png")
+		progreso.put(1,"casa1a.png")
+		progreso.put(2,"casa2a.png")
+		progreso.put(3,"casa3a.png")
+		progreso.put(4,"casa4a.png")
 	}
-	method dar_madera(cantidad){  // el parametro es  la cantidad de recurso que el jugador tiene, y pierde al usarlo en la construccion
-		cmadera = cmadera - cantidad
+	method image(){
+		if (total <= 4){
+			return progreso.basicGet(total.roundUp())
+		} else {return "casafa.png"}
+	} 
+	method terminado(){
+		if (cantidadMadera >= maderaRequiere and cantidadPiedra >= piedraRequiere){
+			game.addVisual(casaAzulFinal)
+			game.removeVisual(self)
+		}
 	}
-	method dar_piedra(cantidad){
-		cpiedra = cpiedra - cantidad
+}
+
+object construccion2 inherits Construccion{
+	const progreso = new Dictionary()
+
+	method iniciar(){
+		progreso.put(0,"casa0r.png")
+		progreso.put(1,"casa1r.png")
+		progreso.put(2,"casa2r.png")
+		progreso.put(3,"casa3r.png")
+		progreso.put(4,"casa4r.png")
 	}
-	// if cmadera and cpiedra <= 0 'finaliza construccion'
-	/*method finalizar(){
-		method image() = "casa.png"
-	} */
+	method image(){
+		if (total <= 4){
+			return progreso.basicGet(total.roundUp())
+		} else {return "casafr.png"}
+	}
+	method terminado(){
+		if (cantidadMadera >= maderaRequiere and cantidadPiedra >= piedraRequiere){
+			game.addVisual(casaRojaFinal)
+			game.removeVisual(self)
+		}
+	}
 }
 ////////////////////////////// CLASES DE JUGADORES
 
@@ -39,6 +83,9 @@ class Jugador{
 	method recolectar_piedra(cantidad){
 		piedra = piedra + cantidad
 	}
+	method darMadera(x){}
+	method darPiedra(x){}
+	method terminado(){}
 }
 
 class Jugador1 inherits Jugador{
@@ -62,7 +109,13 @@ const jugador2 = new Jugador2()
 
 ////////////////////////////// CLASES DE LOS RECURSOS
 
-class Arbol{
+class Recurso{
+	method darMadera(x){}
+	method darPiedra(x){}
+	method terminado(){}
+}
+
+class Arbol inherits Recurso{
 	const cantidad_madera = 1
 	var property position
 	method image() = "arbol.png"
@@ -72,7 +125,7 @@ class Arbol{
 	}
 }
 
-class Piedras{
+class Piedras inherits Recurso{
 	const cantidad_piedra = 1
 	var property position
 	method image() = "piedra.png"
@@ -97,9 +150,9 @@ object ui2{
 }
 
 object timer{
-	var tiempo = 10
+	var tiempo = 50
 	method changeTime(){
-		tiempo =10	}
+		tiempo =50	}
 	method tiempo() = tiempo
 	method position() = game.at(18,24)
 	method text() = "Tiempo:" + self.tiempo()
@@ -127,6 +180,8 @@ object pantalla{
 			game.stop()
 		}
 		keyboard.space().onPressDo{self.start()}
+		construccion1.iniciar()
+		construccion2.iniciar()
 	}
 	method start(){
 		game.removeVisual(inicioDelJuego)
@@ -148,14 +203,12 @@ object pantalla{
 		game.addVisual(timer)
 		game.addVisualCharacter(jugador1)
 		game.addVisual(jugador2)
-		game.onTick(1000,"generar arboles",{game.addVisual(new Arbol(position = game.at(1.randomUpTo(36),18.randomUpTo(23))))})
-		game.onTick(1000,"generar piedras",{game.addVisual(new Piedras(position = game.at(1.randomUpTo(36),1.randomUpTo(6))))})
+		game.addVisual(construccion1)
+		game.addVisual(construccion2)
+		game.onTick(1000,"generar arboles",{game.addVisual(new Arbol(position = game.at(1.randomUpTo(35),18.randomUpTo(23))))})
+		game.onTick(1000,"generar piedras",{game.addVisual(new Piedras(position = game.at(1.randomUpTo(35),1.randomUpTo(6))))})
 		game.onTick(1000,"timer",{ timer.descontarTiempo()})
 		
-		
-		
-		// agregar construcciones para cada jugador (que solo haya 1 para cada uno en cada momento)
-		// agregar arboles y piedras de forma random (tener en cuenta posisicion de contrucciones)
 	}
 
 	method gameOver(){
@@ -180,6 +233,9 @@ object pantalla{
 	}
 	method collisiones(quien){
 		game.onCollideDo(quien,{algo => algo.recolectado(quien)})
+		game.onCollideDo(quien,{algo => algo.darMadera(quien.madera())})
+		game.onCollideDo(quien,{algo => algo.darPiedra(quien.piedra())})
+		game.onCollideDo(quien,{algo => algo.terminado()})
 	}
 }
 	class Visual {
@@ -194,4 +250,20 @@ object pantalla{
 	const inicioDelJuego = new Visual(
 	image =  "inicio.png",
 	position = game.at(-1,2)
-)
+	)
+	const casaAzulFinal = new Visual(
+		image = "casafa.png",
+		position = construccion1.position()
+	)
+	const casaRojaFinal = new Visual(
+		image = "casafr.png",
+		position = construccion2.position()
+	)
+	
+	
+	
+	
+	
+	
+	
+	

@@ -50,7 +50,7 @@ import juego.*
 		} 
 		override method terminado(){
 			if (cantidadMadera >= maderaRequiere and cantidadPiedra >= piedraRequiere){
-				game.addVisual(casaAzulFinal)
+				game.addVisual(new Visual(image ="casafa.png", position = self.position()))
 				self.default()	
 			}
 		}
@@ -73,18 +73,10 @@ import juego.*
 		}
 		override method terminado(){
 			if (cantidadMadera >= maderaRequiere and cantidadPiedra >= piedraRequiere){
-				game.addVisual(casaRojaFinal)
+				game.addVisual( new Visual(image = "casafr.png",position = self.position()))
 				self.default()
 			}
 		}
-	} 
-	const casaAzulFinal = new Visual(
-		image = "casafa.png",
-		position = construccion1.position()
-	)
-	const casaRojaFinal = new Visual(
-		image = "casafr.png",
-		position = construccion2.position()
-	)
+	}
 
 

@@ -1,146 +1,21 @@
 import wollok.game.*
-
-////////////////////////////// CLASE CONSTRUCCION
-
-class Construccion {
-	const maderaRequiere = 5
-	const piedraRequiere = 5
-	var cantidadMadera = 0 // cantidad necesaria para finalizar la contruccion
-	var cantidadPiedra = 0
-	var total = 0
-	var property position = game.at(1.randomUpTo(35),7.randomUpTo(17))
-	
-	method default(){
-		position = game.at(1.randomUpTo(35),7.randomUpTo(17))
-		total = 0
-		cantidadMadera = 0
-		cantidadPiedra =0
-	}
-	method cmadera() = cantidadMadera
-	method cpiedra() = cantidadPiedra
-	method calcularTotal(){
-		total = (cantidadMadera + cantidadPiedra)/2
-	}
-	method darMadera(cantidad){  // el parametro es  la cantidad de recurso que el jugador tiene, y pierde al usarlo en la construccion
-		cantidadMadera = cantidadMadera + cantidad
-		self.calcularTotal()
-	}
-	method darPiedra(cantidad){
-		cantidadPiedra = cantidadPiedra + cantidad
-		self.calcularTotal()
-	}
-	method recolectado(x){}
-}
-
-object construccion1 inherits Construccion{
-	const progreso = new Dictionary()
-
-	method iniciar(){
-		progreso.put(0,"casa0a.png")
-		progreso.put(1,"casa1a.png")
-		progreso.put(2,"casa2a.png")
-		progreso.put(3,"casa3a.png")
-		progreso.put(4,"casa4a.png")
-	}
-	method image(){
-		if (total <= 4){
-			return progreso.basicGet(total.roundUp())
-		} else {return "casa4a.png"}
-	} 
-	method terminado(){
-		if (cantidadMadera >= maderaRequiere and cantidadPiedra >= piedraRequiere){
-			game.addVisual(casaAzulFinal)
-			self.default()	
-		}
-	}
-}
-
-object construccion2 inherits Construccion{
-	const progreso = new Dictionary()
-
-	method iniciar(){
-		progreso.put(0,"casa0r.png")
-		progreso.put(1,"casa1r.png")
-		progreso.put(2,"casa2r.png")
-		progreso.put(3,"casa3r.png")
-		progreso.put(4,"casa4r.png")
-	}
-	method image(){
-		if (total <= 4){
-			return progreso.basicGet(total.roundUp())
-		} else {return "casa4r.png"}
-	}
-	method terminado(){
-		if (cantidadMadera >= maderaRequiere and cantidadPiedra >= piedraRequiere){
-			game.addVisual(casaRojaFinal)
-			self.default()
-		}
-	}
-}
-////////////////////////////// CLASES DE JUGADORES
-
-class Jugador{
-	var madera = 0
-	var piedra = 0
-	method madera() = madera
-	method piedra() = piedra
-	method recolectar_madera(cantidad){
-		madera = madera + cantidad
-	}
-	method recolectar_piedra(cantidad){
-		piedra = piedra + cantidad
-	}
-	method darMadera(x){}
-	method darPiedra(x){}
-	method terminado(){}
-}
-
-class Jugador1 inherits Jugador{
-	var property position = game.at(29,15)
-	method image() = "jugador1.png"
-	method recolectado(x){}
-}
-
-class Jugador2 inherits Jugador{
-	var property position = game.at(5,15)
-	method move(nuevaPosicion) {
-		self.position(nuevaPosicion)
-	}	
-	method image() = "jugador2.png"
-	method recolectado(x){}
-	
-}
+import jugadores.*
+import construcciones.*
+import recursos.*
 
 const jugador1 = new Jugador1()
 const jugador2 = new Jugador2()
 
-////////////////////////////// CLASES DE LOS RECURSOS
 
-class Recurso{
-	method darMadera(x){}
-	method darPiedra(x){}
-	method terminado(){}
+////////////////////////////// CLASE POLIMORFICA
+
+class Polimorfismo {
+	method recolectado(x) {}
+	method darMadera(x) {}
+	method darPiedra(x) {}
+	method terminado() {}
 }
 
-class Arbol inherits Recurso{
-	const cantidad_madera = 1
-	var property position
-	method image() = "arbol.png"
-	method recolectado(quien){
-		game.removeVisual(self)  // mejorar mas adelante
-		quien.recolectar_madera(cantidad_madera)
-	}
-}
-
-class Piedras inherits Recurso{
-	const cantidad_piedra = 1
-	var property position
-	method image() = "piedra.png"
-	method recolectado(quien){
-		game.removeVisual(self) // mejorar mas adelante
-		quien.recolectar_piedra(cantidad_piedra)
-	}
-}
 
 ////////////////////////////// INTERFACES DE USUARIO
 
@@ -245,7 +120,7 @@ object pantalla{
 		game.onCollideDo(quien,{algo => algo.terminado()})
 	}
 }
-	class Visual {
+	class Visual inherits Polimorfismo {
 	var property image
 	var property position = game.origin()
 }
@@ -258,14 +133,7 @@ object pantalla{
 	image =  "inicio.png",
 	position = game.at(-1,2)
 	)
-	const casaAzulFinal = new Visual(
-		image = "casafa.png",
-		position = construccion1.position()
-	)
-	const casaRojaFinal = new Visual(
-		image = "casafr.png",
-		position = construccion2.position()
-	)
+	
 	
 	
 	

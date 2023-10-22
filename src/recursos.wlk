@@ -5,21 +5,21 @@ import juego.*
 
 
 class Arbol inherits Polimorfismo {
-	const cantidad_madera = 1
+	const cantidadMadera = 1
 	var property position
 	method image() = "arbol.png"
 	override method recolectado(quien){
 		game.removeVisual(self)  // mejorar mas adelante
-		quien.recolectar_madera(cantidad_madera)
+		quien.recolectarMadera(cantidadMadera)
 	}
 }
 
 class Piedras inherits Polimorfismo {
-	const cantidad_piedra = 1
+	const cantidadPiedra = 1
 	var property position
 	method image() = "piedra.png"
 	override method recolectado(quien){
 		game.removeVisual(self) // mejorar mas adelante
-		quien.recolectar_piedra(cantidad_piedra)
+		quien.recolectarPiedra(cantidadPiedra)
 	}
 }

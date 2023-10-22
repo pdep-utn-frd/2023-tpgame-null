@@ -3,16 +3,14 @@ import jugadores.*
 import construcciones.*
 import recursos.*
 
-const jugador1 = new Jugador1()
-const jugador2 = new Jugador2()
 
 
 ////////////////////////////// CLASE POLIMORFICA
 
 class Polimorfismo {
 	method recolectado(x) {}
-	method darMadera(x) {}
-	method darPiedra(x) {}
+	method darMadera(x,y) {}
+	method darPiedra(x,y) {}
 	method terminado() {}
 }
 
@@ -22,13 +20,32 @@ class Polimorfismo {
 
 // rehacer las ui como clase si es posible
 object ui1{
-	method position() = game.at(34,24)
-	method text() = 'madera:' + jugador1.madera() + ' ' + 'piedra:' + jugador1.piedra()
+	method position() = game.at(31,24)
+	method text() = 'Madera:' + jugador1.madera() + ' ' + 'Piedra:' + jugador1.piedra()
 }
 
 object ui2{
 	method position() = game.at(2,24)
-	method text() = 'madera:' + jugador2.madera() + ' ' + 'piedra:' + jugador2.piedra()
+	method text() = 'Madera:' + jugador2.madera() + ' ' + 'Piedra:' + jugador2.piedra()
+}
+
+class Contador{
+	var puntos = 0
+	method sumarPuntos(){
+		puntos += 1
+	}
+	method default(){
+		puntos = 0
+	}
+}
+
+object contadorj1 inherits Contador{
+	method position() = game.at(34,24)
+	method text() = 'Puntos j1 = ' + puntos
+}
+object contadorj2 inherits Contador{
+	method position() = game.at(5,24)
+	method text() = 'Puntos j2 = ' + puntos
 }
 
 object timer{
@@ -82,6 +99,8 @@ object pantalla{
 	method visuals(){
 		game.addVisual(ui1)
 		game.addVisual(ui2)
+		game.addVisual(contadorj1)
+		game.addVisual(contadorj2)
 		game.addVisual(timer)
 		game.addVisualCharacter(jugador1)
 		game.addVisual(jugador2)
@@ -95,6 +114,12 @@ object pantalla{
 
 	method gameOver(){
 		game.clear()
+		jugador1.default()
+		jugador2.default()
+		contadorj1.default()
+		contadorj2.default()
+		construccion1.default()
+		construccion2.default()
 		game.addVisual(finDelJuego)
 		keyboard.space().onPressDo{
 			game.removeVisual(finDelJuego)
@@ -115,8 +140,8 @@ object pantalla{
 	}
 	method collisiones(quien){
 		game.onCollideDo(quien,{algo => algo.recolectado(quien)})
-		game.onCollideDo(quien,{algo => algo.darMadera(quien.madera())})
-		game.onCollideDo(quien,{algo => algo.darPiedra(quien.piedra())})
+		game.onCollideDo(quien,{algo => algo.darMadera(quien.madera(),quien)})
+		game.onCollideDo(quien,{algo => algo.darPiedra(quien.piedra(),quien)})
 		game.onCollideDo(quien,{algo => algo.terminado()})
 	}
 }

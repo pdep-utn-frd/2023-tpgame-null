@@ -8,26 +8,52 @@ class Jugador inherits Polimorfismo  {
 	var piedra = 0
 	method madera() = madera
 	method piedra() = piedra
-	method recolectar_madera(cantidad){
+	method recolectarMadera(cantidad){
 		madera = madera + cantidad
 	}
-	method recolectar_piedra(cantidad){
+	method recolectarPiedra(cantidad){
 		piedra = piedra + cantidad
+	}
+	method restarMadera(cantidad){
+		if(cantidad < 5){
+			madera = madera - cantidad
+		}else{
+			madera = madera - 5
+		}
+		
+	}
+	method restarPiedra(cantidad){
+		if(cantidad < 5){
+			piedra = piedra - cantidad
+		}else{
+			piedra = piedra - 5
+		}
+	}
+	method default(){
+		madera = 0
+		piedra = 0
+	} 
+}
+
+object jugador1 inherits Jugador{
+	var property position = game.at(29,15)
+	method image() = "jugador1.png"
+	override method default(){
+		super()
+		position = game.at(29,15)
 	}
 }
 
-class Jugador1 inherits Jugador{
-	var property position = game.at(29,15)
-	method image() = "jugador1.png"
-}
-
-class Jugador2 inherits Jugador{
+object jugador2 inherits Jugador{
 	var property position = game.at(5,15)
 	method move(nuevaPosicion) {
 		self.position(nuevaPosicion)
 	}	
 	method image() = "jugador2.png"
-	
+	override method default(){
+		super()
+		position = game.at(5,15)
+	}
 }
 
 

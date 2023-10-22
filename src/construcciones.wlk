@@ -1,6 +1,6 @@
 import wollok.game.*
 import juego.*
-
+import visuales.*
 
 ////////////////////////////// CLASE CONSTRUCCION
 	

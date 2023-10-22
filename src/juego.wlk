@@ -2,7 +2,7 @@ import wollok.game.*
 import jugadores.*
 import construcciones.*
 import recursos.*
-
+import visuales.*
 
 
 ////////////////////////////// CLASE POLIMORFICA
@@ -145,21 +145,7 @@ object pantalla{
 		game.onCollideDo(quien,{algo => algo.terminado()})
 	}
 }
-	class Visual inherits Polimorfismo {
-	var property image
-	var property position = game.origin()
-}
-	
-	const finDelJuego = new Visual(
-		image = "gameOverRed.png",
-		position = game.at(-1,2)
-	)
-	const inicioDelJuego = new Visual(
-	image =  "inicio.png",
-	position = game.at(-1,2)
-	)
-	
-	
+
 	
 	
 	

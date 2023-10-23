@@ -20,7 +20,7 @@ class Polimorfismo {
 
 // rehacer las ui como clase si es posible
 object ui1{
-	method position() = game.at(31,24)
+	method position() = game.at(27,24)
 	method text() = 'Madera:' + jugador1.madera() + ' ' + 'Piedra:' + jugador1.piedra()
 }
 
@@ -29,25 +29,8 @@ object ui2{
 	method text() = 'Madera:' + jugador2.madera() + ' ' + 'Piedra:' + jugador2.piedra()
 }
 
-class Contador{
-	var puntos = 0
-	method sumarPuntos(){
-		puntos += 1
-	}
-	method default(){
-		puntos = 0
-	}
-}
 
-object contadorj1 inherits Contador{
-	method position() = game.at(34,24)
-	method text() = 'Puntos j1 = ' + puntos
-}
-object contadorj2 inherits Contador{
-	method position() = game.at(5,24)
-	method text() = 'Puntos j2 = ' + puntos
-}
-
+// tiempo
 object timer{
 	var tiempo = 50
 	method changeTime(){
@@ -99,8 +82,10 @@ object pantalla{
 	method visuals(){
 		game.addVisual(ui1)
 		game.addVisual(ui2)
-		game.addVisual(contadorj1)
-		game.addVisual(contadorj2)
+		game.addVisual(puntosAzul)
+		game.addVisual(puntosRojo)
+		game.addVisual(contadorAzul)
+		game.addVisual(contadorRojo)
 		game.addVisual(timer)
 		game.addVisualCharacter(jugador1)
 		game.addVisual(jugador2)
@@ -116,13 +101,22 @@ object pantalla{
 		game.clear()
 		jugador1.default()
 		jugador2.default()
-		contadorj1.default()
-		contadorj2.default()
+		contadorAzul.default()
+		contadorRojo.default()
 		construccion1.default()
 		construccion2.default()
-		game.addVisual(finDelJuego)
+		if (contadorAzul.puntos() >= contadorRojo.puntos()){
+			game.addVisual(finDelJuegoAzul)	
+		}else{
+			game.addVisual(finDelJuegoRojo)
+		}
 		keyboard.space().onPressDo{
-			game.removeVisual(finDelJuego)
+			if (game.hasVisual(finDelJuegoAzul)){
+				game.removeVisual(finDelJuegoAzul)
+			}else{
+				
+				game.removeVisual(finDelJuegoRojo)
+			}
 			timer.changeTime()
 			self.inicio()
 		}

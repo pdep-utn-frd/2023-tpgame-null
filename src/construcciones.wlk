@@ -58,7 +58,7 @@ object construccion1 inherits Construccion{
 		if (cantidadMadera >= maderaRequiere and cantidadPiedra >= piedraRequiere){
 			game.addVisual(new Visual(image ="casafa.png", position = self.position()))
 			self.default()
-			contadorj1.sumarPuntos()
+			contadorAzul.sumarPuntos()
 		}
 	}
 }
@@ -82,7 +82,7 @@ object construccion2 inherits Construccion{
 		if (cantidadMadera >= maderaRequiere and cantidadPiedra >= piedraRequiere){
 			game.addVisual( new Visual(image = "casafr.png",position = self.position()))
 			self.default()
-			contadorj2.sumarPuntos()
+			contadorRojo.sumarPuntos()
 		}
 	}
 }

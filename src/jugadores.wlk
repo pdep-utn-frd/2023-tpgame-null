@@ -4,8 +4,8 @@ import juego.*
 ////////////////////////////// CLASES DE JUGADORES
 
 class Jugador inherits Polimorfismo  {
-	var madera = 0
-	var piedra = 0
+	var property madera = 0
+	var property piedra = 0
 	method madera() = madera
 	method piedra() = piedra
 	method recolectarMadera(cantidad){

@@ -8,10 +8,11 @@ import visuales.*
 ////////////////////////////// CLASE POLIMORFICA
 
 class Polimorfismo {
-	method recolectado(x) {}
-	method darMadera(x,y) {}
-	method darPiedra(x,y) {}
-	method terminado() {}
+	method recolectado(x){}
+	method darMadera(x,y){}
+	method darPiedra(x,y){}
+	method terminado(){}
+	method default(){}
 }
 
 

@@ -12,7 +12,7 @@ class Construccion inherits Polimorfismo  {
 	var total = 0
 	var property position = game.at(1.randomUpTo(35),7.randomUpTo(17))
 	
-	method default(){
+	override method default(){
 		position = game.at(1.randomUpTo(35),7.randomUpTo(17))
 		total = 0
 		cantidadMadera = 0

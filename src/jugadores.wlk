@@ -29,7 +29,7 @@ class Jugador inherits Polimorfismo  {
 			piedra = piedra - 5
 		}
 	}
-	method default(){
+	override method default(){
 		madera = 0
 		piedra = 0
 	} 

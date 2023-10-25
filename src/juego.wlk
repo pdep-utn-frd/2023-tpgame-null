@@ -102,14 +102,16 @@ object pantalla{
 		game.clear()
 		jugador1.default()
 		jugador2.default()
-		contadorAzul.default()
-		contadorRojo.default()
 		construccion1.default()
 		construccion2.default()
 		if (contadorAzul.puntos() >= contadorRojo.puntos()){
-			game.addVisual(finDelJuegoAzul)	
+			game.addVisual(finDelJuegoAzul)
+			contadorAzul.default()
+			contadorRojo.default()	
 		}else{
 			game.addVisual(finDelJuegoRojo)
+			contadorAzul.default()
+			contadorRojo.default()
 		}
 		keyboard.space().onPressDo{
 			if (game.hasVisual(finDelJuegoAzul)){

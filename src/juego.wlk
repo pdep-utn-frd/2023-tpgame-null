@@ -3,6 +3,7 @@ import jugadores.*
 import construcciones.*
 import recursos.*
 import visuales.*
+import muros.*
 
 
 ////////////////////////////// CLASE POLIMORFICA
@@ -13,6 +14,7 @@ class Polimorfismo {
 	method darPiedra(x,y){}
 	method terminado(){}
 	method default(){}
+	method colision(x){}
 }
 
 
@@ -33,7 +35,7 @@ object ui2{
 
 // tiempo
 object timer{
-	var tiempo = 2
+	var tiempo = 50
 	method changeTime(){
 		tiempo =50	}
 	method tiempo() = tiempo
@@ -68,6 +70,11 @@ object musica {
 		self.play()
 	}
 }
+
+const muroIzquierda = new MuroIzquierda()
+const muroDerecha = new MuroDerecha()
+const muroArriba = new MuroArriba()
+const muroAbajo = new MuroAbajo()
 
 ////////////////////////////// PANTALLA
 
@@ -110,6 +117,10 @@ var flagInicio = true
 		game.boardGround("fondo.png")
 	}
 	method visuals(){
+		//muroIzquierda.generar()
+		//muroDerecha.generar()
+		//muroArriba.generar()
+		//muroAbajo.generar()
 		game.addVisual(ui1)
 		game.addVisual(ui2)
 		game.addVisual(puntosAzul)

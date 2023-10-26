@@ -6,7 +6,7 @@ class Muros inherits Polimorfismo{
 	method position()
 	method colision(quien)
 }
-
+/*
 object muroIzquierda inherits Muros {
 	override method position() = game.at(,)
 	override method colision(quien){
@@ -32,4 +32,4 @@ object muroAbajo inherits Muros {
 	override method colision(quien){
 		quien.position().up(1)
 	}
-}
+}*/

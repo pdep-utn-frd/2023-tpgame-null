@@ -33,7 +33,7 @@ object ui2{
 
 // tiempo
 object timer{
-	var tiempo = 50
+	var tiempo = 2
 	method changeTime(){
 		tiempo =50	}
 	method tiempo() = tiempo
@@ -47,11 +47,32 @@ object timer{
 	}
 }
 
+//// MUSICA
+object musica {
+	var cancion = game.sound("mainMenu.mp3")
+	method play(){
+		cancion.volume(0.1)
+		cancion.play()
+	}
+	method pause() {
+		cancion.stop() 
+	}
+	method changeToStart(){
+		cancion.stop()
+		cancion = game.sound("gameStart.mp3")
+		self.play()
+	}
+	method changeToMenu(){
+		cancion.stop()
+		cancion = game.sound("mainMenu.mp3")
+		self.play()
+	}
+}
 
 ////////////////////////////// PANTALLA
 
 object pantalla{
-
+var flagInicio = true
 	method inicio(){
 		game.clear()
 		game.height(25) // resolucion optima, poner mas de 25 hace que los png pierdan la relacion de aspecto
@@ -65,8 +86,16 @@ object pantalla{
 		keyboard.space().onPressDo{self.start()}
 		construccion1.iniciar()
 		construccion2.iniciar()
+		if (flagInicio){
+			game.onTick(0, "nose",{
+				flagInicio = false
+				musica.play()
+				game.removeTickEvent("nose")
+		} )}
+		
 	}
 	method start(){
+		musica.changeToStart()
 		game.removeVisual(inicioDelJuego)
 		self.configuracion()
 		self.visuals()
@@ -100,6 +129,7 @@ object pantalla{
 
 	method gameOver(){
 		game.clear()
+		musica.changeToMenu()
 		jugador1.default()
 		jugador2.default()
 		construccion1.default()
@@ -120,6 +150,7 @@ object pantalla{
 				
 				game.removeVisual(finDelJuegoRojo)
 			}
+			musica.pause()
 			timer.changeTime()
 			self.inicio()
 		}

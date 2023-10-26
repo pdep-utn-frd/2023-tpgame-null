@@ -25,11 +25,13 @@ class Polimorfismo {
 object ui1{
 	method position() = game.at(27,24)
 	method text() = 'Madera:' + jugador1.madera() + ' ' + 'Piedra:' + jugador1.piedra()
+	method textColor() = "64493A"
 }
 
 object ui2{
 	method position() = game.at(2,24)
 	method text() = 'Madera:' + jugador2.madera() + ' ' + 'Piedra:' + jugador2.piedra()
+	method textColor() = "64493A"
 }
 
 
@@ -41,6 +43,7 @@ object timer{
 	method tiempo() = tiempo
 	method position() = game.at(18,24)
 	method text() = "Tiempo:" + self.tiempo()
+	method textColor() = "64493A"
 	method descontarTiempo() {
 		if (tiempo > 0){
 		tiempo= tiempo-1}
@@ -53,7 +56,7 @@ object timer{
 object musica {
 	var cancion = game.sound("mainMenu.mp3")
 	method play(){
-		cancion.volume(0.1)
+		cancion.volume(0.4)
 		cancion.play()
 	}
 	method pause() {
@@ -145,21 +148,26 @@ var flagInicio = true
 		jugador2.default()
 		construccion1.default()
 		construccion2.default()
-		if (contadorAzul.puntos() >= contadorRojo.puntos()){
+		if (contadorAzul.puntos() > contadorRojo.puntos()){
 			game.addVisual(finDelJuegoAzul)
 			contadorAzul.default()
 			contadorRojo.default()	
-		}else{
+		}else if(contadorAzul.puntos()<contadorRojo.puntos()){
 			game.addVisual(finDelJuegoRojo)
+			contadorAzul.default()
+			contadorRojo.default()
+		}else{
+			game.addVisual(finDelJuegoEmpate)
 			contadorAzul.default()
 			contadorRojo.default()
 		}
 		keyboard.space().onPressDo{
 			if (game.hasVisual(finDelJuegoAzul)){
 				game.removeVisual(finDelJuegoAzul)
-			}else{
-				
+			}else if(game.hasVisual(finDelJuegoRojo)){
 				game.removeVisual(finDelJuegoRojo)
+			}else{
+				game.removeVisual(finDelJuegoEmpate)
 			}
 			musica.pause()
 			timer.changeTime()
@@ -185,9 +193,6 @@ var flagInicio = true
 	}
 }
 
-	
-	
-	
 	
 	
 	

@@ -7,7 +7,10 @@ class Visual inherits Polimorfismo {
 	var property image
 	var property position = game.origin()
 }
-	
+const finDelJuegoEmpate = new Visual(
+	image = "GameOverTie.png",
+	position = game.at(-1,2)
+)
 const finDelJuegoRojo = new Visual(
 	image = "GameOverRed.png",
 	position = game.at(-1,2)

@@ -8,7 +8,7 @@ import muros.*
 
 ////////////////////////////// CLASE POLIMORFICA
 
-class Polimorfismo {
+class ElementosDeJuego {
 	method recolectado(x){}
 	method darMadera(x,y){}
 	method darPiedra(x,y){}
@@ -22,13 +22,13 @@ class Polimorfismo {
 
 
 // rehacer las ui como clase si es posible
-object ui1{
+object ui1 inherits ElementosDeJuego{
 	method position() = game.at(27,24)
 	method text() = 'Madera:' + jugador1.madera() + ' ' + 'Piedra:' + jugador1.piedra()
 	method textColor() = "64493A"
 }
 
-object ui2{
+object ui2 inherits ElementosDeJuego{
 	method position() = game.at(2,24)
 	method text() = 'Madera:' + jugador2.madera() + ' ' + 'Piedra:' + jugador2.piedra()
 	method textColor() = "64493A"
@@ -36,7 +36,7 @@ object ui2{
 
 
 // tiempo
-object timer{
+object timer inherits ElementosDeJuego{
 	var tiempo = 50
 	method changeTime(){
 		tiempo =50	}
@@ -97,10 +97,10 @@ var flagInicio = true
 		construccion1.iniciar()
 		construccion2.iniciar()
 		if (flagInicio){
-			game.onTick(0, "nose",{
+			game.onTick(0, "musica",{
 				flagInicio = false
 				musica.play()
-				game.removeTickEvent("nose")
+				game.removeTickEvent("musica")
 		} )}
 		
 	}
@@ -120,10 +120,10 @@ var flagInicio = true
 		game.boardGround("fondo.png")
 	}
 	method visuals(){
-		//muroIzquierda.generar()
-		//muroDerecha.generar()
-		//muroArriba.generar()
-		//muroAbajo.generar()
+		muroIzquierda.generar()
+		muroDerecha.generar()
+		muroArriba.generar()
+		muroAbajo.generar()
 		game.addVisual(ui1)
 		game.addVisual(ui2)
 		game.addVisual(puntosAzul)

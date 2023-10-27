@@ -3,7 +3,7 @@ import juego.*
 
 ////////////////////////////// CLASES DE JUGADORES
 
-class Jugador inherits Polimorfismo  {
+class Jugador inherits juego.ElementosDeJuego  {
 	var property madera = 0
 	var property piedra = 0
 	method madera() = madera
@@ -47,7 +47,10 @@ object jugador1 inherits Jugador{
 object jugador2 inherits Jugador{
 	var property position = game.at(5,15)
 	method move(nuevaPosicion) {
-		self.position(nuevaPosicion)
+		if(nuevaPosicion.x() > -2 && nuevaPosicion.x() < 35 && nuevaPosicion.y() > -1 && nuevaPosicion.y() < 24){
+			self.position(nuevaPosicion)
+		}
+		
 	}	
 	method image() = "jugador2.png"
 	override method default(){

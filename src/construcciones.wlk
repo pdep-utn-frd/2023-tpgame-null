@@ -4,7 +4,7 @@ import visuales.*
 
 ////////////////////////////// CLASE CONSTRUCCION
 	
-class Construccion inherits Polimorfismo  {
+class Construccion inherits juego.ElementosDeJuego  {
 	const property maderaRequiere = 5
 	const property piedraRequiere = 5
 	var cantidadMadera = 0 // cantidad necesaria para finalizar la contruccion

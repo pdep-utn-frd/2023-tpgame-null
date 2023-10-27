@@ -4,7 +4,7 @@ import juego.*
 ////////////////////////////// CLASES DE LOS RECURSOS
 
 
-class Arbol inherits Polimorfismo {
+class Arbol inherits juego.ElementosDeJuego {
 	const cantidadMadera = 1
 	var property position
 	method image() = "arbol.png"
@@ -14,7 +14,7 @@ class Arbol inherits Polimorfismo {
 	}
 }
 
-class Piedras inherits Polimorfismo {
+class Piedras inherits juego.ElementosDeJuego {
 	const cantidadPiedra = 1
 	var property position
 	method image() = "piedra.png"

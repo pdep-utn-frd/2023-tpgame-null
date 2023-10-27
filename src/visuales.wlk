@@ -3,7 +3,7 @@ import juego.*
 import jugadores.*
 
 
-class Visual inherits Polimorfismo {
+class Visual inherits juego.ElementosDeJuego {
 	var property image
 	var property position = game.origin()
 }

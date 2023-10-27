@@ -2,7 +2,7 @@ import wollok.game.*
 import juego.*
 import jugadores.*
 
-class Muro inherits Polimorfismo{
+class Muro inherits juego.ElementosDeJuego{
 	const ancho = 35
 	const largo = 24
 	const posicionesMuros = []

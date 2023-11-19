@@ -4,6 +4,9 @@
 
 Este juego desarrollado en Wollok es un emocionante desafío para dos jugadores, donde la creatividad y la destreza son clave. La premisa del juego gira en torno a la construcción de casas mediante la recolección estratégica de maderas y piedras.
 
+![Captura de pantalla del juego](assets/inicio.png)
+
+
 ## Equipo de Desarrollo
 
 Este emocionante juego ha sido creado por un talentoso equipo de estudiantes de la UTN Facultad Regional Delta como parte de su cursada en Paradigmas de Programación durante el año 2023. Conozcamos a los brillantes desarrolladores detrás de esta experiencia única:

@@ -33,7 +33,7 @@ Este equipo ha combinado su pasión por la programación y la creatividad para l
 
 1. **Instalación de Wollok**: Asegúrate de tener Wollok instalado en tu sistema.
 
-2. **Descarga del Juego**: Clona o descarga el repositorio del juego desde [enlace al repositorio].
+2. **Descarga del Juego**: Clona o descarga el repositorio del juego.
 
 3. **Ejecución**: Abre el archivo principal en Wollok y ejecuta el juego.
 

@@ -34,11 +34,18 @@ Este equipo ha combinado su pasión por la programación y la creatividad para l
 
 3. **Recursos**: Los jugadores deben recoger maderas y piedras para construir sus casas. Cada recurso recolectado contribuye a la construcción de una casa del color correspondiente al jugador.
 
+
+![jugador 1](assets/piedra.png)
+![jugador 2](assets/madera.png)
+
+
 4. **Zonas de Recolección**: Se establecen zonas específicas para recoger maderas y piedras. Los jugadores deben desplazarse estratégicamente para optimizar la recolección.
 
 5. **Construcción**: Los jugadores pueden construir casas en cualquier momento durante el juego. La cantidad de recursos acumulados determina cuántas casas pueden construir.
 
 6. **Tiempo Límite**: El juego tiene un límite de tiempo predefinido. Al finalizar el tiempo, el jugador que haya construido más casas es declarado ganador.
+
+![jugador 1](assets/gameOverRed.png)
 
 ## Instrucciones de Ejecución
 

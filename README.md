@@ -36,7 +36,7 @@ Este equipo ha combinado su pasión por la programación y la creatividad para l
 
 
 ![jugador 1](assets/piedra.png)
-![jugador 2](assets/madera.png)
+![jugador 2](assets/arbol.png)
 
 
 4. **Zonas de Recolección**: Se establecen zonas específicas para recoger maderas y piedras. Los jugadores deben desplazarse estratégicamente para optimizar la recolección.
@@ -45,7 +45,7 @@ Este equipo ha combinado su pasión por la programación y la creatividad para l
 
 6. **Tiempo Límite**: El juego tiene un límite de tiempo predefinido. Al finalizar el tiempo, el jugador que haya construido más casas es declarado ganador.
 
-![jugador 1](assets/gameOverRed.png)
+![jugador 1](assets/GameOverRed.png)
 
 ## Instrucciones de Ejecución
 

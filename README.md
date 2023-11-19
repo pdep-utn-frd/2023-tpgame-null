@@ -22,6 +22,9 @@ Este equipo ha combinado su pasión por la programación y la creatividad para l
 
 1. **Objetivo**: Construir la mayor cantidad de casas del color asignado en un tiempo determinado.
 
+![jugador 1](assets/casafa.png)
+![jugador 2](assets/casafr.png)
+
 2. **Jugadores**: Dos participantes compiten, cada uno representado por un personaje de color rojo o azul.
 
 
